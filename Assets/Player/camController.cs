@@ -8,6 +8,7 @@ public class camController : MonoBehaviour
     public Transform playerCam, character, centerPoint;
 
     CharacterController player;
+    Transform playerTransform;
 
     private float mouseYPosition,Sensitivity,zoomSpeed,zoomMin,zoomMax,walkSpeed,rotationSpeed,verticalVelocity,jumpDist, sprintSpeed, Speed;
     private float zoom,rotX, rotY,moveFB, moveLR;
@@ -24,7 +25,8 @@ public class camController : MonoBehaviour
         walkSpeed = 2f;
         rotationSpeed = 5f;
         jumpDist = 5f;
-        player = GameObject.Find("Player").GetComponent<CharacterController>(); 
+        player = GameObject.Find("Player").GetComponent<CharacterController>();
+        playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         Cursor.lockState = CursorLockMode.Locked;
         zoom = -3;
         sprintSpeed = 3f;
@@ -67,6 +69,15 @@ public class camController : MonoBehaviour
         {
             verticalVelocity += jumpDist;
             jumpTimes++;
+        }
+
+        if (Input.GetKeyDown("left ctrl"))
+        {
+            playerTransform.transform.localScale = new Vector3(1, 0.5F, 1);
+        }
+        if (Input.GetKeyUp("left ctrl"))
+        {
+            playerTransform.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
